@@ -23,11 +23,56 @@ namespace HealthSystem
             ShieldCap = 100;
 
             ShowHUD();
+            Console.WriteLine("Test damage");
+            TakeDamage(60);
+            ShowHUD();
+
+            Console.WriteLine("Test negative input");
+            TakeDamage(-50);
+            ShowHUD();
+
+            Console.WriteLine("Heal test");
+            ShieldRestore(10);
+            ShowHUD();
+
+            Console.WriteLine("Over heal test");
+            ShieldRestore(150);
+            ShowHUD();
+
+            //Console.WriteLine("Death test");
+            //TakeDamage(1000);
+            //ShowHUD();
+
+
+
         }
 
 
         static void ShowHUD()
         {
+           // string status;
+           // status = "";
+
+            //if ((Health >= 50) && (Health <= 75)) //&& and oporator
+           // {
+           //     status = "ok";
+           // }
+
+           // if ((Health >= 0) && (Health <= 25))
+           // {
+            //    status = "Critical";
+           // }
+
+           // if ((Health >= 25) && (Health <= 50))
+           // {
+            //    status = "Hurt";
+           // }
+
+           // if ((Health >= 75) && (Health <= 100))
+           // {
+            //    status = "Healthy";
+           // }
+
             Console.WriteLine("Cool Game");
             Console.WriteLine(" | " + "Health:" + Health + " | " + "Shield:" + Shield + " | " + "Lives:" + Lives + " | ");
             Console.ReadKey(true);
@@ -40,8 +85,8 @@ namespace HealthSystem
 
             if (damage < 0)
             {
-                Console.WriteLine("No negative numbers!");
-                Health += damage;
+                Console.WriteLine("No negative numbers");
+                return;
             }
 
             Shield -= damage;
@@ -49,6 +94,19 @@ namespace HealthSystem
                 Health = Health + Shield;
             if (Shield < 0)
                 Shield = 0;
+
+            if (Shield > ShieldCap)
+            {
+                Console.WriteLine("No negative numbers");
+                Shield = 100;
+
+            }
+
+            if (Health > HealthCap)
+            {
+                Console.WriteLine("No negative numbers");
+                Health = 100;
+            }
         }
 
 
@@ -86,20 +144,6 @@ namespace HealthSystem
             Health = 100;
             Lives = 3;
             Shield = 100;
-        }
-
-
-        static void ErrorChecks()
-        {
-            if (Shield > ShieldCap)
-                Console.WriteLine("No negative numbers!");
-            Shield = 100;
-
-            if (Health > HealthCap)
-                Console.WriteLine("No negative numbers!");
-            Health = 100;
-
-            Console.ReadKey(true);
         }
     }
 }
