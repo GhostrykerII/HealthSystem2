@@ -13,6 +13,7 @@ namespace HealthSystem
         static int Lives;
         static int HealthCap;
         static int ShieldCap;
+        static string HealthStatus;
 
         static void Main(string[] args)
         {
@@ -21,23 +22,49 @@ namespace HealthSystem
             Lives = 3;
             HealthCap = 100;
             ShieldCap = 100;
+            
 
             ShowHUD();
             Console.WriteLine("Test damage");
+            Console.WriteLine();
             TakeDamage(60);
             ShowHUD();
 
+            Console.WriteLine("Test damage");
+            Console.WriteLine();
+            TakeDamage(100);
+            ShowHUD();
+
             Console.WriteLine("Test negative input");
+            Console.WriteLine();
             TakeDamage(-50);
             ShowHUD();
 
             Console.WriteLine("Heal test");
-            ShieldRestore(10);
+            Console.WriteLine();
+            Heal(10);
             ShowHUD();
 
             Console.WriteLine("Over heal test");
+            Console.WriteLine();
+            Heal(150);
+            ShowHUD();
+
+            Console.WriteLine("Shield Heal test");
+            Console.WriteLine();
+            ShieldRestore(10);
+            ShowHUD();
+
+            Console.WriteLine("Shield over heal test");
+            Console.WriteLine();
             ShieldRestore(150);
             ShowHUD();
+
+            Console.WriteLine("Lives test");
+            Console.WriteLine();
+            TakeDamage(210);
+            ShowHUD();
+
 
             //Console.WriteLine("Death test");
             //TakeDamage(1000);
@@ -50,31 +77,16 @@ namespace HealthSystem
 
         static void ShowHUD()
         {
-           // string status;
-           // status = "";
+            ShowStatus();
 
-            //if ((Health >= 50) && (Health <= 75)) //&& and oporator
-           // {
-           //     status = "ok";
-           // }
-
-           // if ((Health >= 0) && (Health <= 25))
-           // {
-            //    status = "Critical";
-           // }
-
-           // if ((Health >= 25) && (Health <= 50))
-           // {
-            //    status = "Hurt";
-           // }
-
-           // if ((Health >= 75) && (Health <= 100))
-           // {
-            //    status = "Healthy";
-           // }
-
-            Console.WriteLine("Cool Game");
+            Console.WriteLine();
+            Console.WriteLine("           --- Cool Game ---          ");
+            Console.WriteLine(" -------------------------------------");
             Console.WriteLine(" | " + "Health:" + Health + " | " + "Shield:" + Shield + " | " + "Lives:" + Lives + " | ");
+            Console.WriteLine(" -------------------------------------");
+            Console.WriteLine(" | " + "Health Status:  " + HealthStatus + " | ");
+            Console.WriteLine(" --------------------------");
+            Console.WriteLine();
             Console.ReadKey(true);
         }
 
@@ -107,6 +119,7 @@ namespace HealthSystem
                 Console.WriteLine("No negative numbers");
                 Health = 100;
             }
+        
         }
 
 
@@ -144,6 +157,30 @@ namespace HealthSystem
             Health = 100;
             Lives = 3;
             Shield = 100;
+        }
+
+        static void ShowStatus()
+        {
+
+            if ((Health >= 50) && (Health <= 75))
+            {
+                HealthStatus = "ok";
+            }
+
+            if ((Health >= 0) && (Health <= 25))
+            {
+                HealthStatus = "Critical";
+            }
+           
+           if ((Health >= 25) && (Health <= 50))
+           {
+                HealthStatus = "Hurt";
+           }
+
+           if ((Health >= 75) && (Health <= 100))
+           {
+               HealthStatus = "Healthy";
+           }
         }
     }
 }
